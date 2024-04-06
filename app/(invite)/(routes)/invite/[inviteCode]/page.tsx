@@ -6,11 +6,9 @@ import { redirect } from "next/navigation";
 interface InviteCodePageProps {
   params: {
     inviteCode: string;
-  }
+  };
 }
-const InviteCodePage = async ({
-  params
-}: InviteCodePageProps) => {
+const InviteCodePage = async ({ params }: InviteCodePageProps) => {
   const profile = await currentProfile();
 
   if (!profile) {
@@ -26,11 +24,11 @@ const InviteCodePage = async ({
       inviteCode: params.inviteCode,
       members: {
         some: {
-          profileId: profile.id
-        }
-      }
-    }
-    })
+          profileId: profile.id,
+        },
+      },
+    },
+  });
 
   if (existingServer) {
     return redirect(`/servers/${existingServer.id}`);
@@ -44,16 +42,18 @@ const InviteCodePage = async ({
       members: {
         create: [
           {
-            profileId: profile.id
-          }
-        ]
-      }
-    }
-    })
+            profileId: profile.id,
+          },
+        ],
+      },
+    },
+  });
 
-  return (
-    <div>InviteCodePage</div>
-  )
-}
+  if (server) {
+    return redirect(`/servers/${server.id}`);
+  }
+
+  return null;
+};
 
 export default InviteCodePage;
