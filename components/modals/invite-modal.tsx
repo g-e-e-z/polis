@@ -72,7 +72,8 @@ export const InviteModal = () => {
             <Button disabled={isLoading} onClick={onCopy} size="icon">
               {copied
                 ? <Check className="w-4 h-4" />
-                : <Copy className="w-4 h-4" />}
+                : <Copy className="w-4 h-4" />
+              }
             </Button>
           </div>
           <Button
